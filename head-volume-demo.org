@@ -1,0 +1,56 @@
+#+TITLE: SD 端板容積計算
+#+AUTHOR: 各申機械設計工作室
+#+DATE: 2021-12-06
+#+OPTIONS: texht:t
+#+OPTIONS: toc:nil
+#+LATEX_CLASS: xecjk-article
+#+LATEX_CLASS_OPTIONS: [12pt]
+#+LATEX_HEADER: \usepackage[margin=2cm]{geometry}
+#+LATEX_HEADER: \usepackage{lastpage,fancyhdr}
+#+LATEX_HEADER: \fancyhf{}
+#+LATEX_HEADER: \fancyhead{}
+#+LATEX_HEADER: \fancyfoot[C]{\thepage / \pageref{LastPage}}
+#+LATEX_HEADER: \renewcommand{\headrulewidth}{0pt}
+#+LATEX_HEADER: \renewcommand{\footrulewidth}{0pt}
+
+* head volume
+** head-volume.mac
+   #+begin_src maxima
+     /*使用 maxima 計算 10:1 (SD) 端板容積*/
+
+     kill(all);
+     /*下載 Head_volume.mac 後載入*/
+     load("Head_volume.mac");
+
+     ID: 1230.0 ;mm;
+     /*端板直部*/
+     L: 38.0 ;mm;
+
+     head[type]:"SD";
+
+     /*容器設計容積*/
+     V[vessel]:2.0e9 ;mm^3;
+
+     /*端板容積*/
+     V[head]:volume_head(1230.0,38.0,head[type]);
+
+     /*殼板長度*/
+     h[1]:float((V[vessel] - (V[head]*2)) / (ID^2 * %pi/4));
+
+     /*TL to TL，切線到切線*/
+     L2L: L *2 + h[1];
+
+     print("單一端板容積：",float(V[head])," mm^3");
+
+     print("TL-to-TL：",L2L," mm");
+
+   #+end_src
+#+LATEX: \newpage
+** 結果
+   #+begin_src text
+     單一端板容積： 229315251.9307544 mm^3
+     TL-to-TL： 1373.199150989516 mm
+
+   #+end_src
+** Pic
+   file+emacs:pic/cal-head-sd-ID1230.pdf
