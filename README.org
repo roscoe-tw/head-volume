@@ -1,6 +1,6 @@
 #+TITLE:壓力容器端板容積計算
 * 端板容積
-  file+emacs:pic/cal-head-sd-1.png
+  [[file+emacs:pic/cal-head-sd-1.png]]
   - head type = "SE", R = ID x 0.9045, r = ID x 0.1727
   - head type = "SD", R = ID x 1.0, r = ID x 0.1
 ** maxima
